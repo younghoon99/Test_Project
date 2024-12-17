@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{25E5C9A9-2FC2-FA5E-6069-51506DA26EE5}</ProjectGuid>
+    <ProjectGuid>{062DA2F3-DD46-6267-2FFE-541D52E21A77}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -60,9 +60,15 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.22f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scenes\Main\Script\RockCollision.cs" />
     <Compile Include="Assets\Scenes\Main\Script\RespawnManager.cs" />
+    <Compile Include="Assets\Scenes\Main\Script\SpawnManager.cs" />
     <Compile Include="Assets\Scenes\Main\Script\CameraController.cs" />
-    <Compile Include="Assets\Scenes\Main\Script\Move.cs" />
+    <Compile Include="Assets\Scenes\Main\Script\Player.cs" />
+    <Compile Include="Assets\Scenes\Main\Script\RockBehavior.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Lowpoly Nature &amp; Village Pack\HowToSetup.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

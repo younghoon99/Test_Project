@@ -377,8 +377,11 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.22f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.22f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/Scenes/Main/Script/CameraController.cs"
-"Assets/Scenes/Main/Script/Move.cs"
+"Assets/Scenes/Main/Script/Player.cs"
 "Assets/Scenes/Main/Script/RespawnManager.cs"
+"Assets/Scenes/Main/Script/RockBehavior.cs"
+"Assets/Scenes/Main/Script/RockCollision.cs"
+"Assets/Scenes/Main/Script/SpawnManager.cs"
 -langversion:9.0
 
 /deterministic
