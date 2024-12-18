@@ -7,3 +7,4 @@ Logs/* filter=lfs diff=lfs merge=lfs -text
 Packages/* filter=lfs diff=lfs merge=lfs -text
 ProjectSettings/* filter=lfs diff=lfs merge=lfs -text
 UserSettings/* filter=lfs diff=lfs merge=lfs -text
+Onlyup/* filter=lfs diff=lfs merge=lfs -text
