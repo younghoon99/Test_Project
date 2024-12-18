@@ -1,6 +1,9 @@
-using TMPro.EditorUtilities;
+using TMPro;
 using UnityEngine;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
+#if UNITY_EDITOR
+using UnityEditor.Searcher;  // UnityEditor 관련 코드를 에디터 전용으로 감싸기
+#endif
+
 
 public class Player : MonoBehaviour
 {
