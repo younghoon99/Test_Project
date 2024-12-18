@@ -3,7 +3,8 @@ using UnityEngine;
 public class RespawnManager : MonoBehaviour
 {
     public Transform player; // 플레이어 참조
-    public Vector3 respawnPosition; // 리스폰할 위치
+    public Vector3 respawnPosition; 
+    public Transform someObject;// 리스폰할 위치
 
     void Start()
     {
@@ -11,7 +12,7 @@ public class RespawnManager : MonoBehaviour
             player = GameObject.FindWithTag("Player").transform;
 
         // 기본 리스폰 위치 설정 (필요에 따라 수정)
-        respawnPosition = player.position;
+        respawnPosition = someObject.position;
     }
 
     void Update()

@@ -1,4 +1,6 @@
+using TMPro.EditorUtilities;
 using UnityEngine;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class Player : MonoBehaviour
 {
@@ -9,21 +11,69 @@ public class Player : MonoBehaviour
     private float currentSpeed; // 현재 이동 속도
     private Rigidbody rb;
     public Transform playerCamera; // 카메라 참조
+    public Animator animator; // Animator 컴포넌트
+
+
 
     private bool isGrounded; // 지면에 있는지 여부
     private bool canJump = true; // 점프 가능 여부
+    private bool isJumping = false; // 점프 상태를 추적하는 변수
     [SerializeField] SpawnManager spawnManager;  //돌 스폰매니저
+    // **Audio 관련 추가된 부분**
+    public AudioSource audioSource; // 점프 사운드를 재생할 AudioSource
+    public AudioClip jumpSound; // 점프 사운드 클립
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         currentSpeed = moveSpeed; // 시작 시 기본 이동 속도로 설정
+        animator = GetComponent<Animator>(); // Animator 컴포넌트 초기화
+
+        // AudioSource 초기화
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
     }
 
     void Update()
     {
         MovePlayer();
         JumpPlayer();
+
+        //애니매이션 wlak,jump 적용
+        AnimWalk();
+        AnimJump();
+    }
+
+    void AnimWalk()
+    {
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+
+        // 이동 속도가 0.1 이상이면 걷는 애니메이션 시작
+        if (Mathf.Abs(horizontal) > 0.1f || Mathf.Abs(vertical) > 0.1f)
+        {
+            animator.SetBool("IsWalking", true); // 걷기 애니메이션 시작
+        }
+        else
+        {
+            animator.SetBool("IsWalking", false); // 멈추면 Idle 애니메이션
+        }
+    }
+
+    void AnimJump()
+    {
+        // 점프 상태가 true일 때 점프 애니메이션 실행
+        if (isJumping)
+        {
+            animator.SetBool("IsJumping", true);
+        }
+        else
+        {
+            animator.SetBool("IsJumping", false);
+        }
     }
 
     void MovePlayer()
@@ -36,10 +86,15 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             currentSpeed = sprintSpeed; // 달리기 속도
+            if (!animator.GetBool("IsRunning")) // 이미 달리고 있지 않다면
+            {
+                animator.SetBool("IsRunning", true); // 달리기 애니메이션 시작
+            }
         }
         else
         {
             currentSpeed = moveSpeed; // 기본 이동 속도
+            animator.SetBool("IsRunning", false); // 멈추면 Idle 애니메이션
         }
 
         // 카메라의 forward(전방)과 right(우측) 방향을 기준으로 이동 방향을 계산
@@ -67,7 +122,15 @@ public class Player : MonoBehaviour
         if (isGrounded && Input.GetButtonDown("Jump") && canJump)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            isJumping = true; // 점프 시작 시 true로 설정
             canJump = false; // 점프 후 한 번만 가능하도록 설정
+
+            // **점프 사운드 재생**
+            if (jumpSound != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(jumpSound);
+            }
+
         }
     }
 
@@ -78,6 +141,8 @@ public class Player : MonoBehaviour
         {
             isGrounded = true;
             canJump = true; // 지면에 닿았을 때 점프 가능하도록 설정
+            isJumping = false; // 착지 시 false로 설정
+            //animator.SetBool("IsJumping", false);
         }
     }
 
